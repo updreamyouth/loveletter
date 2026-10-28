@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>방문자 통계 · 2026 엎드림 전도축제</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  @font-face {
+    font-family: "Reko";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Recipekorea.woff") format("woff");
+    font-display: swap;
+  }
+  :root {
+    --brand: #7e1e00;
+    --cream: #fff8e7;
+    --yellow: #ffdf74;
+    --line: rgba(126, 30, 0, .18);
+    --muted: #9a5a40;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--cream); color: var(--brand);
+    font-family: "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    line-height: 1.6; word-break: keep-all;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+  }
+  .wrap { width: min(100% - 32px, 760px); margin: 0 auto; padding: 32px 0 60px; }
+  header h1 { margin: 0; font-family: "Reko", "Pretendard", sans-serif; font-weight: normal; font-size: clamp(26px, 6vw, 34px); }
+  header p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+
+  .card { background: #fff; border-radius: 14px; padding: 20px; margin-top: 16px; border: 1px solid var(--line); }
+  .card h2 { margin: 0 0 14px; font-size: 16px; }
+
+  .big { display: flex; flex-wrap: wrap; gap: 12px; }
+  .big div { flex: 1 1 140px; background: var(--yellow); border-radius: 12px; padding: 14px 16px; }
+  .big b { display: block; font-size: 34px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .big span { font-size: 13px; }
+
+  .chart { display: flex; align-items: flex-end; gap: 4px; height: 160px; padding-top: 18px; overflow-x: auto; }
+  .bar { flex: 1 0 18px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; min-width: 18px; }
+  .bar i { display: block; width: 100%; background: var(--brand); border-radius: 4px 4px 0 0; min-height: 2px; }
+  .bar em { font-style: normal; font-size: 11px; margin-bottom: 3px; font-variant-numeric: tabular-nums; }
+  .bar small { font-size: 10px; color: var(--muted); margin-top: 4px; white-space: nowrap; }
+
+  .rows { list-style: none; margin: 0; padding: 0; }
+  .rows li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .rows li:last-child { border-bottom: 0; }
+  .rows .meter { grid-column: 1 / -1; height: 6px; background: var(--cream); border-radius: 3px; overflow: hidden; }
+  .rows .meter i { display: block; height: 100%; background: var(--brand); }
+  .rows b { font-variant-numeric: tabular-nums; }
+  .empty { color: var(--muted); font-size: 14px; margin: 0; }
+
+  .grid2 { display: grid; gap: 16px; }
+  @media (min-width: 640px) { .grid2 { grid-template-columns: 1fr 1fr; } .grid2 .card { margin-top: 0; } }
+  .grid2 { margin-top: 16px; }
+
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 20px; font-size: 13px; color: var(--muted); }
+  button {
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--brand);
+    background: var(--brand); color: #fff;
+  }
+  button.ghost { background: transparent; color: var(--brand); }
+  button:focus-visible, input:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  .key-form { display: grid; gap: 10px; }
+  .key-form input { font: inherit; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--line); width: 100%; }
+  .msg { margin-top: 16px; padding: 12px 14px; border-radius: 10px; background: #fff0e8; font-size: 14px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>방문자 통계</h1>
+    <p>2026 엎드림 전도축제 초대 페이지 · 10월 28일부터 집계</p>
+  </header>
+
+  <!-- 열람 키 입력 (링크에 키가 없을 때만 보임) -->
+  <section class="card" id="keyBox" hidden>
+    <h2>열람 키를 입력해 주세요</h2>
+    <form class="key-form" id="keyForm">
+      <input id="keyInput" type="password" autocomplete="off" placeholder="전달받은 열람 키" aria-label="열람 키">
+      <button type="submit">통계 보기</button>
+    </form>
+  </section>
+
+  <div id="msg" class="msg" role="status" hidden></div>
+
+  <main id="stats" hidden>
+    <section class="card">
+      <div class="big">
+        <div><b id="total">–</b><span>전체 방문자</span></div>
+        <div><b id="today">–</b><span>오늘 방문자</span></div>
+        <div><b id="qr">–</b><span>QR로 들어온 방문자</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>날짜별 방문자</h2>
+      <div class="chart" id="chart"></div>
+    </section>
+
+    <div class="grid2">
+      <section class="card">
+        <h2>어디서 들어왔나요</h2>
+        <ul class="rows" id="sources"></ul>
+      </section>
+      <section class="card">
+        <h2>기기</h2>
+        <ul class="rows" id="systems"></ul>
+      </section>
+    </div>
+
+    <div class="toolbar">
+      <button type="button" id="refresh">새로고침</button>
+      <span id="updated"></span>
+      <button type="button" class="ghost" id="logout" style="margin-left:auto">이 기기에서 키 지우기</button>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var API = 'https://yevop.goatcounter.com/api/v0';
+  var START = '2026-10-27T15:00:00Z'; // 한국 시간 10월 28일 0시
+  var STORE = 'loveletter-stats-key';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  // 링크 끝의 #k=열람키 를 읽어 저장하고 주소창에서는 지움
+  var m = location.hash.match(/k=([^&]+)/);
+  if (m) {
+    try { localStorage.setItem(STORE, decodeURIComponent(m[1])); } catch (e) {}
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  var key = null;
+  try { key = localStorage.getItem(STORE); } catch (e) {}
+  if (!key && m) key = decodeURIComponent(m[1]);
+
+  function showMsg(t) { $('msg').textContent = t; $('msg').hidden = !t; }
+
+  function endTime() {
+    var d = new Date(); d.setUTCMinutes(0, 0, 0); d.setUTCHours(d.getUTCHours() + 1);
+    return d.toISOString().replace('.000', '');
+  }
+
+  function get(path, params) {
+    var q = new URLSearchParams(Object.assign({ start: START, end: endTime() }, params || {}));
+    return fetch(API + path + '?' + q, {
+      headers: { 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json' }
+    }).then(function (r) {
+      if (r.status === 401 || r.status === 403) throw new Error('auth');
+      if (r.status === 429) throw new Error('rate');
+      if (!r.ok) throw new Error('http');
+      return r.json();
+    });
+  }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function fmt(n) { return (n || 0).toLocaleString('ko-KR'); }
+
+  function renderRows(el, list, label) {
+    el.textContent = '';
+    if (!list.length) {
+      var p = document.createElement('p'); p.className = 'empty'; p.textContent = '아직 데이터가 없어요.';
+      el.appendChild(p); return;
+    }
+    var max = Math.max.apply(null, list.map(function (x) { return x.count; }));
+    list.forEach(function (x) {
+      var li = document.createElement('li');
+      var name = document.createElement('span'); name.textContent = label ? label(x) : x.name;
+      var cnt = document.createElement('b'); cnt.textContent = fmt(x.count) + '명';
+      var meter = document.createElement('div'); meter.className = 'meter';
+      var bar = document.createElement('i'); bar.style.width = (max ? x.count / max * 100 : 0) + '%';
+      meter.appendChild(bar);
+      li.append(name, cnt, meter); el.appendChild(li);
+    });
+  }
+
+  function sourceLabel(x) {
+    var n = (x.name || '').trim();
+    if (x.ref_scheme === 'c' && n.toLowerCase() === 'qr') return 'QR 코드';
+    if (!n || n === '(no data)') return '직접 접속 (카톡·문자 링크 등)';
+    if (/instagram/i.test(n)) return '인스타그램';
+    if (/kakao/i.test(n)) return '카카오톡';
+    if (/youtube/i.test(n)) return '유튜브';
+    if (/naver/i.test(n)) return '네이버';
+    if (/google/i.test(n)) return '구글';
+    return n;
+  }
+
+  function load() {
+    showMsg('불러오는 중…');
+    var out = {};
+    // API 속도 제한(초당 4회)을 넘지 않게 순서대로 요청
+    get('/stats/total')
+      .then(function (r) { out.total = r; return wait(300); })
+      .then(function () { return get('/stats/campaigns', { limit: 10 }); })
+      .then(function (r) { out.campaigns = r.stats || []; return wait(300); })
+      .then(function () { return get('/stats/toprefs', { limit: 10 }); })
+      .then(function (r) { out.refs = r.stats || []; return wait(300); })
+      .then(function () { return get('/stats/systems', { limit: 8 }); })
+      .then(function (r) { out.systems = r.stats || []; render(out); })
+      .catch(function (e) {
+        if (e.message === 'auth') {
+          try { localStorage.removeItem(STORE); } catch (x) {}
+          key = null; $('stats').hidden = true; $('keyBox').hidden = false;
+          showMsg('열람 키가 맞지 않거나 사용이 중지됐어요. 키를 다시 확인해 주세요.');
+        } else if (e.message === 'rate') {
+          showMsg('요청이 너무 잦아요. 몇 초 뒤에 새로고침을 눌러 주세요.');
+        } else {
+          showMsg('통계를 불러오지 못했어요. 인터넷 연결을 확인한 뒤 새로고침을 눌러 주세요.');
+        }
+      });
+  }
+
+  function render(d) {
+    var days = (d.total.stats || []).map(function (s) { return { day: s.day, n: s.daily || 0 }; });
+    var todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul' }).format(new Date());
+    var today = days.find(function (x) { return x.day === todayStr; });
+    var qr = d.campaigns.filter(function (x) { return (x.name || '').toLowerCase() === 'qr'; })
+                        .reduce(function (a, x) { return a + x.count; }, 0);
+
+    $('total').textContent = fmt(d.total.total);
+    $('today').textContent = fmt(today ? today.n : 0);
+    $('qr').textContent = fmt(qr);
+
+    // 날짜별 막대
+    var chart = $('chart'); chart.textContent = '';
+    var max = Math.max.apply(null, days.map(function (x) { return x.n; }).concat([1]));
+    days.forEach(function (x) {
+      var b = document.createElement('div'); b.className = 'bar';
+      var v = document.createElement('em'); v.textContent = x.n;
+      var i = document.createElement('i'); i.style.height = (x.n / max * 100) + '%';
+      var s = document.createElement('small'); var p = x.day.split('-'); s.textContent = (+p[1]) + '/' + (+p[2]);
+      b.title = x.day + ' · ' + x.n + '명';
+      b.append(v, i, s); chart.appendChild(b);
+    });
+    chart.scrollLeft = chart.scrollWidth;
+
+    // 유입 경로: QR 같은 캠페인 + 일반 유입
+    var sources = d.campaigns.map(function (x) { return { name: x.name, count: x.count, ref_scheme: 'c' }; })
+      .concat(d.refs.filter(function (x) { return x.ref_scheme !== 'c'; }));
+    sources.sort(function (a, b) { return b.count - a.count; });
+    renderRows($('sources'), sources.slice(0, 8), sourceLabel);
+    renderRows($('systems'), d.systems);
+
+    $('updated').textContent = new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }) + ' 기준';
+    $('stats').hidden = false; $('keyBox').hidden = true; showMsg('');
+  }
+
+  $('keyForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('keyInput').value.trim(); if (!v) return;
+    key = v; try { localStorage.setItem(STORE, v); } catch (x) {}
+    $('keyInput').value = ''; load();
+  });
+  $('refresh').addEventListener('click', load);
+  $('logout').addEventListener('click', function () {
+    try { localStorage.removeItem(STORE); } catch (x) {}
+    key = null; $('stats').hidden = true; $('keyBox').hidden = false; showMsg('');
+  });
+
+  if (key) load(); else $('keyBox').hidden = false;
+})();
+</script>
+</body>
+</html>
