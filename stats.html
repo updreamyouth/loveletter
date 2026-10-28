@@ -135,12 +135,12 @@
   // 링크 끝의 #k=열람키 를 읽어 저장하고 주소창에서는 지움
   var m = location.hash.match(/k=([^&]+)/);
   if (m) {
-    try { localStorage.setItem(STORE, decodeURIComponent(m[1])); } catch (e) {}
+    try { localStorage.setItem(STORE, decodeURIComponent(m[1]).trim()); } catch (e) {}
     history.replaceState(null, '', location.pathname + location.search);
   }
   var key = null;
   try { key = localStorage.getItem(STORE); } catch (e) {}
-  if (!key && m) key = decodeURIComponent(m[1]);
+  if (!key && m) key = decodeURIComponent(m[1]).trim();
 
   function showMsg(t) { $('msg').textContent = t; $('msg').hidden = !t; }
 
@@ -154,10 +154,14 @@
     return fetch(API + path + '?' + q, {
       headers: { 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json' }
     }).then(function (r) {
-      if (r.status === 401 || r.status === 403) throw new Error('auth');
-      if (r.status === 429) throw new Error('rate');
-      if (!r.ok) throw new Error('http');
-      return r.json();
+      if (r.ok) return r.json();
+      return r.text().then(function (t) {
+        var detail = '';
+        try { var j = JSON.parse(t); detail = j.error || JSON.stringify(j.errors || ''); } catch (e) { detail = t; }
+        var err = new Error(r.status === 401 || r.status === 403 ? 'auth' : r.status === 429 ? 'rate' : 'http');
+        err.detail = '(' + r.status + ' ' + String(detail).slice(0, 120) + ')';
+        throw err;
+      });
     });
   }
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
@@ -184,7 +188,7 @@
 
   function sourceLabel(x) {
     var n = (x.name || '').trim();
-    if (x.ref_scheme === 'c' && n.toLowerCase() === 'qr') return 'QR 코드';
+    if (n.toLowerCase() === 'qr') return 'QR 코드';
     if (!n || n === '(no data)') return '직접 접속 (카톡·문자 링크 등)';
     if (/instagram/i.test(n)) return '인스타그램';
     if (/kakao/i.test(n)) return '카카오톡';
@@ -210,11 +214,11 @@
         if (e.message === 'auth') {
           try { localStorage.removeItem(STORE); } catch (x) {}
           key = null; $('stats').hidden = true; $('keyBox').hidden = false;
-          showMsg('열람 키가 맞지 않거나 사용이 중지됐어요. 키를 다시 확인해 주세요.');
+          showMsg('열람 키가 맞지 않거나 권한이 없어요. 키를 다시 확인해 주세요. ' + (e.detail || ''));
         } else if (e.message === 'rate') {
           showMsg('요청이 너무 잦아요. 몇 초 뒤에 새로고침을 눌러 주세요.');
         } else {
-          showMsg('통계를 불러오지 못했어요. 인터넷 연결을 확인한 뒤 새로고침을 눌러 주세요.');
+          showMsg('통계를 불러오지 못했어요. 새로고침을 눌러 주세요. ' + (e.detail || '(' + e.message + ')'));
         }
       });
   }
@@ -223,8 +227,9 @@
     var days = (d.total.stats || []).map(function (s) { return { day: s.day, n: s.daily || 0 }; });
     var todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul' }).format(new Date());
     var today = days.find(function (x) { return x.day === todayStr; });
-    var qr = d.campaigns.filter(function (x) { return (x.name || '').toLowerCase() === 'qr'; })
-                        .reduce(function (a, x) { return a + x.count; }, 0);
+    // QR 링크는 ?utm_source=qr 이라 GoatCounter에서 '유입 경로(referrer)'의 qr 로 집계됨
+    var isQr = function (x) { return (x.name || '').trim().toLowerCase() === 'qr'; };
+    var qr = d.refs.filter(isQr).reduce(function (a, x) { return a + x.count; }, 0);
 
     $('total').textContent = fmt(d.total.total);
     $('today').textContent = fmt(today ? today.n : 0);
@@ -244,8 +249,7 @@
     chart.scrollLeft = chart.scrollWidth;
 
     // 유입 경로: QR 같은 캠페인 + 일반 유입
-    var sources = d.campaigns.map(function (x) { return { name: x.name, count: x.count, ref_scheme: 'c' }; })
-      .concat(d.refs.filter(function (x) { return x.ref_scheme !== 'c'; }));
+    var sources = d.refs.slice();
     sources.sort(function (a, b) { return b.count - a.count; });
     renderRows($('sources'), sources.slice(0, 8), sourceLabel);
     renderRows($('systems'), d.systems);
