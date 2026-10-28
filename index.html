@@ -166,8 +166,19 @@
   /* ---------- 스크롤 등장 효과 (아임웹 fadeInUp 재현) ---------- */
   .js .reveal { opacity: 0; transform: translate3d(0, 40px, 0); }
   .js .reveal.is-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s ease; }
+  /* 사진 일부는 위로 움직이지 않고 서서히 나타나기만 (원본 fadeIn) */
+  .js .reveal.fade { transform: none; }
+  /* Love Letter 이미지: 원본 jackInTheBox 효과 */
+  .js .reveal.jack { transform: none; }
+  .js .reveal.jack.is-in { transition: none; animation: jackInTheBox .9s ease both; }
+  @keyframes jackInTheBox {
+    from { opacity: 0; transform: scale(.1) rotate(30deg); transform-origin: center bottom; }
+    50%  { transform: rotate(-10deg); }
+    70%  { transform: rotate(3deg); }
+    to   { opacity: 1; transform: scale(1); }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .js .reveal { opacity: 1; transform: none; }
+    .js .reveal, .js .reveal.jack.is-in { opacity: 1; transform: none; animation: none; }
   }
 
   /* ---------- 슬라이드 배너 ---------- */
@@ -242,7 +253,7 @@
         <h2 class="reveal">은혜로운 말씀</h2>
         <p class="sub reveal">이기찬 목사님의 설교</p>
       </div>
-      <div class="media-col reveal">
+      <div class="media-col">
         <div class="slider" aria-roledescription="carousel" aria-label="설교 사진">
           <div class="slider-track">
             <img src="images/sermon1.jpg" alt="설교하시는 이기찬 목사님, 자막: 두려워하지 말고 믿기만 하라" width="1023" height="620" loading="lazy">
@@ -262,7 +273,7 @@
         <h2 class="reveal">성가대팀의 특별 공연</h2>
         <p class="sub reveal">엎드림 청년부에서만 볼 수 있는 특별한 공연!</p>
       </div>
-      <div class="media-col reveal">
+      <div class="media-col reveal fade">
         <div class="photo overlay">
           <img src="images/choir.jpg" alt="뚜카펠라 팀의 공연 모습" width="700" height="342" loading="lazy">
           <span>뚜카펠라의 공연을 기대해 주세요 !</span>
@@ -276,7 +287,7 @@
         <h2 class="reveal">처음 오신다구요?!<br>웰컴키트 받아가세요!</h2>
         <p class="sub reveal">환영의 의미로 준비한 웰컴키트!<br>무엇인지 궁금하다면 방문 후 확인해보기!</p>
       </div>
-      <div class="media-col reveal">
+      <div class="media-col reveal fade">
         <img class="gift" src="images/gift.png" alt="빨간 리본이 묶인 선물 상자" width="640" height="640" loading="lazy">
       </div>
     </article>
@@ -287,7 +298,7 @@
         <h2 class="reveal">배부른 게 최고야!</h2>
         <p class="sub reveal">예배로 마음을 채웠다면, 이제는 배를 채울 시간 🍚</p>
       </div>
-      <div class="media-col reveal">
+      <div class="media-col reveal fade">
         <img class="photo" src="images/meal.jpg" alt="청년들이 함께 식사하며 웃는 사진들" width="700" height="1244" loading="lazy">
       </div>
       <p class="desc text-col reveal">맛있는 음식과 즐거운 대화가 기다리는 식탁교제!<br>이야기를 듣고 나누며 웃고 떠들다 보면<br>어느새 한 걸음 더 가까워져 있는 우리<br>배도 마음도 든든하게 채워 가요 :)</p>
@@ -311,7 +322,7 @@
 </section>
 
 <section>
-  <img class="letter-img reveal" src="images/loveletter.jpg" alt="하트 위에 Love Letter라고 쓰인 로고" width="700" height="450" loading="lazy">
+  <img class="letter-img reveal jack" src="images/loveletter.jpg" alt="하트 위에 Love Letter라고 쓰인 로고" width="700" height="450" loading="lazy">
   <div class="inner letter-text reveal">
     <p>누군가에게 편지를 받는다는 건 참 설레는 일이죠</p>
     <p>어느 날, 나를 향한 편지 한 통이 도착한다면 어떨까요?</p>
