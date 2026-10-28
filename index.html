@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2026 엎드림 전도축제 · Love Letter</title>
+<meta name="description" content="2026년 11월 15일(일) 오후 1시 50분, 광음교회 엎드림 청년부 전도축제에 여러분을 초대합니다.">
+<meta name="theme-color" content="#7e1e00">
+
+<!-- 카카오톡·인스타 등 링크 공유 미리보기 -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://updreamyouth.github.io/loveletter/">
+<meta property="og:title" content="2026 엎드림 전도축제 · Love Letter">
+<meta property="og:description" content="11월 15일(일) 오후 1:50 · 광음교회 지하1층 본당 · 20세 이상 누구나">
+<meta property="og:image" content="https://updreamyouth.github.io/loveletter/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+<style>
+  :root {
+    --brand: #7e1e00;
+    --brand-soft: #a8472a;
+    --paper: #fff8e7;
+    --sun: #f7d97a;
+    --ink: #3b1406;
+    --muted: #8a5a45;
+    --line: #e9d7b8;
+    --surface: #ffffff;
+    --serif: "Gowun Batang", "Nanum Myeongjo", "AppleMyungjo", serif;
+    --sans: "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --brand: #f0a07e;
+      --brand-soft: #e08a66;
+      --paper: #1f120c;
+      --sun: #3a2614;
+      --ink: #f6e8d6;
+      --muted: #c9a891;
+      --line: #4a3020;
+      --surface: #2a1911;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.8;
+    word-break: keep-all;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--brand-soft); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { width: min(100% - 40px, 720px); margin-inline: auto; }
+
+  /* 항공우편 줄무늬: 페이지의 시그니처 요소 */
+  .airmail {
+    height: 10px;
+    background: repeating-linear-gradient(-45deg,
+      var(--brand) 0 14px, transparent 14px 22px,
+      #2f5d8a 22px 36px, transparent 36px 44px);
+  }
+  @media (prefers-color-scheme: dark) {
+    .airmail { background: repeating-linear-gradient(-45deg,
+      #b8502c 0 14px, transparent 14px 22px, #4f7fae 22px 36px, transparent 36px 44px); }
+  }
+
+  /* ---------- 헤더 ---------- */
+  .top {
+    padding-top: env(safe-area-inset-top, 0px);
+    background: var(--sun);
+  }
+  .top-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0;
+    font-family: var(--serif); font-weight: 700; color: var(--brand);
+  }
+  .top-inner nav { display: flex; gap: 18px; font-family: var(--sans); font-weight: 600; font-size: 15px; }
+  .top-inner nav a { text-decoration: none; }
+  .top-inner nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* ---------- 히어로: 봉투 ---------- */
+  .hero { background: var(--sun); padding: 32px 0 56px; }
+  .envelope {
+    position: relative;
+    background: var(--surface);
+    border-radius: 6px;
+    box-shadow: 0 18px 40px -22px rgba(80, 20, 0, .55);
+    overflow: hidden;
+  }
+  .envelope-body { padding: 28px 28px 32px; text-align: center; }
+  .stamp {
+    position: absolute; top: 22px; right: 20px;
+    width: 76px; padding: 8px 4px;
+    border: 2px dashed var(--brand);
+    color: var(--brand);
+    font-family: var(--serif); font-size: 12px; line-height: 1.35; text-align: center;
+    transform: rotate(6deg);
+    background: var(--paper);
+  }
+  .stamp b { display: block; font-size: 22px; }
+  .hero-img { width: min(100%, 460px); margin: 8px auto 4px; border-radius: 4px; }
+  .hero h1 {
+    margin: 12px 0 6px;
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(28px, 6vw, 40px); line-height: 1.3;
+    color: var(--brand);
+  }
+  .hero .lead { margin: 0; font-size: 17px; color: var(--muted); }
+
+  .facts {
+    margin: 26px 0 0; padding: 0;
+    display: grid; grid-template-columns: auto 1fr; gap: 8px 18px;
+    text-align: left;
+    border-top: 1px dashed var(--line); padding-top: 22px;
+  }
+  .facts dt { font-weight: 700; color: var(--brand); }
+  .facts dd { margin: 0; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; }
+  .btn {
+    display: inline-block; padding: 12px 22px; border-radius: 999px;
+    font-weight: 700; font-size: 15px; text-decoration: none;
+    border: 2px solid var(--brand);
+  }
+  .btn-solid { background: var(--brand); color: var(--paper); }
+  .btn-line { color: var(--brand); }
+
+  /* ---------- 공통 섹션 ---------- */
+  section { padding: 72px 0; }
+  .sec-title {
+    margin: 0 0 8px;
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(24px, 4.6vw, 30px); line-height: 1.4;
+    color: var(--brand);
+  }
+  .sec-desc { margin: 0 0 36px; color: var(--muted); }
+
+  /* ---------- 편지 본문 ---------- */
+  .letter {
+    font-family: var(--serif); font-size: 18px; line-height: 2.1;
+    background:
+      repeating-linear-gradient(to bottom, transparent 0 calc(2.1em - 1px), var(--line) calc(2.1em - 1px) 2.1em);
+    padding: 0 4px;
+  }
+  .letter p { margin: 0 0 2.1em; }
+  .letter .sign { text-align: right; color: var(--brand); font-weight: 700; margin-bottom: 0; }
+
+  /* ---------- 프로그램 ---------- */
+  .program { list-style: none; margin: 0; padding: 0; display: grid; gap: 56px; }
+  .program li { display: grid; gap: 18px; }
+  .program figure { margin: 0; }
+  .program img { width: 100%; border-radius: 6px; background: var(--surface); }
+  .program .gift img { width: 60%; margin-inline: auto; background: none; }
+  .program .meal img { aspect-ratio: 4 / 3; object-fit: cover; object-position: top; }
+  .program .quote {
+    background: var(--brand); color: var(--paper); border-radius: 6px;
+    padding: 48px 28px; text-align: center;
+  }
+  .program .quote blockquote { margin: 0; font-family: var(--serif); font-size: 24px; line-height: 1.6; }
+  .program figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; text-align: center; }
+  .program .step {
+    font-family: var(--serif); font-size: 15px; color: var(--brand-soft);
+    border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 10px;
+  }
+  .program h3 { margin: 0 0 4px; font-family: var(--serif); font-size: 23px; line-height: 1.45; color: var(--brand); }
+  .program .sub { margin: 0 0 10px; font-weight: 700; }
+  .program p { margin: 0; }
+
+  @media (min-width: 760px) {
+    .wrap.wide { width: min(100% - 64px, 960px); }
+    .program li { grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; }
+    .program li:nth-child(even) figure { order: 2; }
+  }
+
+  /* ---------- 일정 ---------- */
+  .schedule-bg { background: var(--sun); }
+  .schedule { margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--brand); }
+  .schedule li {
+    display: grid; grid-template-columns: 9.5em 1fr; gap: 12px;
+    padding: 16px 4px; border-bottom: 1px solid color-mix(in srgb, var(--brand) 25%, transparent);
+  }
+  .schedule time { font-weight: 700; color: var(--brand); font-variant-numeric: tabular-nums; }
+  @media (max-width: 420px) {
+    .schedule li { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ---------- 오시는 길 ---------- */
+  .address { font-size: 18px; font-weight: 700; margin: 0 0 6px; }
+  .place { margin: 0 0 22px; color: var(--muted); }
+  .routes { margin: 28px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+  .routes li { background: var(--surface); border-left: 4px solid var(--brand); padding: 14px 16px; border-radius: 0 6px 6px 0; }
+  .routes b { color: var(--brand); display: block; }
+
+  /* ---------- 푸터 ---------- */
+  footer { padding: 40px 0 48px; text-align: center; font-size: 14px; color: var(--muted); }
+  footer .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 12px; font-weight: 600; color: var(--brand); }
+  footer p { margin: 0; }
+
+  /* ---------- 등장 애니메이션 (히어로 한 번만) ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .envelope { animation: arrive .9s cubic-bezier(.2,.8,.2,1) both; }
+    .stamp { animation: stamp .5s .7s cubic-bezier(.3,1.6,.5,1) both; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(28px) rotate(-1.5deg); } }
+    @keyframes stamp { from { opacity: 0; transform: rotate(6deg) scale(1.6); } }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="airmail" aria-hidden="true"></div>
+  <div class="wrap top-inner">
+    <span>엎드림 청년부</span>
+    <nav aria-label="바로가기">
+      <a href="#program">프로그램</a>
+      <a href="#schedule">일정</a>
+      <a href="#location">오시는 길</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <article class="envelope">
+      <div class="airmail" aria-hidden="true"></div>
+      <div class="stamp" aria-hidden="true">2026<b>11.15</b>광음교회</div>
+      <div class="envelope-body">
+        <img class="hero-img" src="images/loveletter.jpg" alt="하트 위에 Love Letter라고 쓰인 축제 로고" width="1138" height="731">
+        <h1>2026 엎드림 전도축제</h1>
+        <p class="lead">당신에게 편지 한 통이 도착했어요</p>
+
+        <dl class="facts">
+          <dt>날짜</dt><dd>2026년 11월 15일 (일)</dd>
+          <dt>시간</dt><dd>오후 1시 50분</dd>
+          <dt>장소</dt><dd>광음교회 지하 1층 본당</dd>
+          <dt>대상</dt><dd>20세 이상 청년이라면 누구나</dd>
+        </dl>
+
+        <div class="actions">
+          <!-- 신청 폼이 생기면 아래 주석을 풀고 href에 링크를 넣으세요
+          <a class="btn btn-solid" href="https://forms.gle/여기에-링크">참석 신청하기</a>
+          -->
+          <a class="btn btn-solid" href="#location">오시는 길 보기</a>
+          <a class="btn btn-line" href="https://www.instagram.com/updream_youth" target="_blank" rel="noopener">인스타그램</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<section aria-labelledby="letter-title">
+  <div class="wrap">
+    <h2 class="sec-title" id="letter-title">초대의 글</h2>
+    <div class="letter">
+      <p>누군가에게 편지를 받는다는 건 참 설레는 일이죠.<br>
+      어느 날, 나를 향한 편지 한 통이 도착한다면 어떨까요?</p>
+      <p>그 편지에 담긴 이야기가 궁금하지 않으신가요?<br>
+      어쩌면 오래 기다려 온 이야기가 이 안에 담겨 있을지도 몰라요.</p>
+      <p>이번 LOVE LETTER에서 말씀과 찬양, 교제를 통해 하나님을 만나고,
+      우리를 향한 그분의 마음에 귀 기울여 보세요. ❤</p>
+      <p>혼자 짊어지기 무거웠던 마음들,<br>
+      함께 나누며 따뜻한 위로를 얻는 곳,<br>
+      엎드림 청년부에 당신을 초대합니다.</p>
+      <p class="sign">광음교회 엎드림 청년부 드림</p>
+    </div>
+  </div>
+</section>
+
+<section id="program" aria-labelledby="program-title">
+  <div class="wrap wide">
+    <h2 class="sec-title" id="program-title">이날 함께할 것들</h2>
+    <p class="sec-desc">축제는 이 순서대로 진행돼요.</p>
+
+    <ol class="program">
+      <li>
+        <figure>
+          <img src="images/worship.jpg" alt="청년부 찬양팀과 워십팀이 무대에서 찬양하는 모습" loading="lazy" width="900" height="628">
+        </figure>
+        <div>
+          <div class="step">첫 번째</div>
+          <h3>함께 찬양해요</h3>
+          <p class="sub">UYC와 위아워십이 함께해요</p>
+          <p>청년부 찬양팀, 워십팀과 함께하는 즐거운 찬양 시간! 다 함께 찬양하며 예배의 기쁨을 누리고, 마음을 모아 찬양🎵과 춤💃으로 하나님께 사랑과 감사를 올려드려요. 찬양 가운데 임하시는 하나님의 은혜를 경험해 보세요.</p>
+        </div>
+      </li>
+
+      <li>
+        <figure class="quote"><blockquote>하나님께서<br>당신에게 전하고 싶은<br>이야기가 있습니다</blockquote></figure>
+        <div>
+          <div class="step">두 번째</div>
+          <h3>은혜로운 말씀</h3>
+          <p class="sub">이기찬 목사님의 설교</p>
+          <p>누군가의 말 한마디가 간절해지는 날, 따뜻한 위로가 필요한 순간, 하나님께서 당신에게 전하고 싶은 이야기가 있습니다. 말씀을 통해 전해지는 하나님의 사랑❤ 하나님께서 우리에게 전하고 싶은 이야기는 무엇일까요?</p>
+        </div>
+      </li>
+
+      <li>
+        <figure>
+          <img src="images/choir.jpg" alt="흰 가운을 입은 뚜카펠라 팀이 본당에서 노래하는 모습" loading="lazy" width="1000" height="488">
+          <figcaption>뚜카펠라의 공연을 기대해 주세요!</figcaption>
+        </figure>
+        <div>
+          <div class="step">세 번째</div>
+          <h3>성가대팀의 특별 공연</h3>
+          <p class="sub">엎드림 청년부에서만 볼 수 있는 무대</p>
+          <p>아카펠라 팀 뚜카펠라가 이날을 위해 특별한 공연을 준비하고 있어요.</p>
+        </div>
+      </li>
+
+      <li>
+        <figure class="gift">
+          <img src="images/welcomekit.png" alt="빨간 리본이 묶인 선물 상자 그림" loading="lazy" width="640" height="640">
+        </figure>
+        <div>
+          <div class="step">네 번째</div>
+          <h3>처음 오셨다면, 웰컴키트 받아가세요</h3>
+          <p class="sub">환영의 마음을 담아 준비했어요</p>
+          <p>무엇이 들어 있는지는 직접 방문해서 확인해 보세요!</p>
+        </div>
+      </li>
+
+      <li class="meal">
+        <figure>
+          <img src="images/meal.jpg" alt="청년들이 식탁에 둘러앉아 식사하며 웃는 사진들" loading="lazy" width="1000" height="1778">
+        </figure>
+        <div>
+          <div class="step">다섯 번째</div>
+          <h3>배부른 게 최고야!</h3>
+          <p class="sub">예배로 마음을 채웠다면, 이제 배를 채울 시간 🍚</p>
+          <p>맛있는 음식과 즐거운 대화가 기다리는 식탁 교제. 이야기를 듣고 나누며 웃고 떠들다 보면 어느새 한 걸음 더 가까워진 우리. 배도 마음도 든든하게 채워 가요 :)</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="schedule" class="schedule-bg" aria-labelledby="schedule-title">
+  <div class="wrap">
+    <h2 class="sec-title" id="schedule-title">11월 15일 (일) 일정</h2>
+    <p class="sec-desc">몸과 마음이 지친 청년, 위로가 필요한 청년, 하나님과 더 가까워지고 싶은 청년까지 모두 함께 이 순간을 즐겨요.</p>
+    <ul class="schedule">
+      <li><time>13:50</time><span>본당에 모여 찬양으로 예배 열기</span></li>
+      <li><time>14:00 – 15:00</time><span>찬양, 말씀, 기도, 특별 공연</span></li>
+      <li><time>15:00 – 15:30</time><span>광고 및 환영회</span></li>
+      <li><time>15:30 ~</time><span>맛있는 음식 먹으며 이야기 나눠요</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="location" aria-labelledby="location-title">
+  <div class="wrap">
+    <h2 class="sec-title" id="location-title">오시는 길</h2>
+    <p class="address">경기 부천시 원미구 상이로 92, 광음교회</p>
+    <p class="place">지하 1층 본당</p>
+    <div class="actions" style="justify-content:flex-start; margin-top:0">
+      <a class="btn btn-solid" href="https://map.naver.com/p/search/%EA%B4%91%EC%9D%8C%EA%B5%90%ED%9A%8C" target="_blank" rel="noopener">네이버 지도</a>
+      <a class="btn btn-line" href="https://map.kakao.com/?q=%EA%B4%91%EC%9D%8C%EA%B5%90%ED%9A%8C" target="_blank" rel="noopener">카카오맵</a>
+    </div>
+    <ul class="routes">
+      <li><b>송내역</b>B 정류장에서 33, 66번 버스 → 상동중학교 하차</li>
+      <li><b>상동역</b>3번 출구 앞 정류장에서 33, 66번 버스 → 상미초등학교 하차</li>
+      <li><b>부천시청역</b>경기예고 앞 정류장에서 66번 버스 → 상동중학교 하차</li>
+      <li><b>부평역</b>테마의 거리 앞 정류장에서 579번 버스 → 부평동중 하차</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="airmail" aria-hidden="true" style="margin-bottom:36px"></div>
+  <div class="wrap">
+    <div class="links">
+      <a href="https://www.instagram.com/updream_youth" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@updream_youth" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://kwangeum.org" target="_blank" rel="noopener">광음교회 홈페이지</a>
+    </div>
+    <p>광음교회 엎드림 청년부</p>
+  </div>
+</footer>
+
+</body>
+</html>
